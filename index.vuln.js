@@ -47,8 +47,23 @@ const Vulnerability2 = (req, res) => {
         }
     });
 }
+const Vulnerability3 = (req, res) => {
 
+    User.find({ 
+        username: req.body.username,
+        password: req.body.password 
+    }, function (err, user) {
+        if (err) {
+            // handle error
+        } else {
+            if (user.length >= 1) {
+                res.json({role: user[0].role, username: user[0].username, msg: "Correct!" });
+            }
+        }
+    });
+}
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/vuln1', Vulnerability1);
 app.get('/vuln2', Vulnerability2);
+app.get('/vuln2', Vulnerability3);
